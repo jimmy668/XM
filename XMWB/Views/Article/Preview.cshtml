@@ -1,0 +1,28 @@
+﻿@model XMWB.Models.TB_ARTICLE
+
+@{
+    ViewBag.Title = "Preview";
+}
+
+
+<article class="weui_article Article">
+    <h1 class="Article__title">@Model.CM_TITLE</h1>
+    <section class="Article__meta">
+
+        <span class="Article__meta__date">string.Format("{0:D}", @Model.CM_TIME)</span>
+        <span class="Article__meta__author"><a href="../Home/Pages/Firstpage.html">@Model.CM_AUTHOR</a></span>
+
+    </section>
+    <section class="Article__content">
+        <p id="article">
+            @Html.Raw(Model.CM_CONTENT)
+            @*@MvcHtmlString(Model.CM_CONTENT);*@
+        </p>
+    </section>
+</article>
+
+@*<script>
+    $(function () {
+        $("#article").html(decodeURI(@Model.CM_CONTENT));
+    });
+</script>*@

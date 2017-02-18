@@ -1,0 +1,43 @@
+.Homepage {
+  padding-bottom: 60px;
+  margin-top: 0; }
+  .Homepage__header {
+    padding: 0; }
+  .Homepage__block {
+    width: 50%;
+    display: inline-block; }
+    .Homepage__block__inner {
+      padding: 10px; }
+  .Homepage__link {
+    display: block;
+    width: 100%;
+    border: 1px solid #ADADAD;
+    box-shadow: 1px 1px 3px #ADADAD;
+    padding: 10px 5px 10px 0;
+    box-sizing: border-box;
+    height: 86px;
+    background-color: #fff;
+    border-radius: 5px; }
+    .Homepage__link__inner {
+      box-sizing: border-box;
+      width: 50%;
+      text-align: center;
+      display: inline-block;
+      vertical-align: middle; }
+      .Homepage__link__inner span {
+        display: block; }
+    .Homepage__link__title, .Homepage__link__content {
+      width: 100%;
+      overflow: hidden; }
+    .Homepage__link__icon {
+      width: 50px;
+      height: 60px; }
+    .Homepage__link__title {
+      font-size: 16px;
+      color: #1C1C1C;
+      font-weight: 700; }
+    .Homepage__link__content {
+      font-size: 10px;
+      color: #444444; }
+
+/*# sourceMappingURL=Homepage.css.map */

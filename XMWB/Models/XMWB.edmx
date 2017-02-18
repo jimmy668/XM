@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ADModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TB_ADVERT">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CM_TITLE" Type="nvarchar" MaxLength="20" />
+          <Property Name="CM_PICPATH" Type="varchar" MaxLength="50" />
+          <Property Name="CM_URL" Type="nvarchar" MaxLength="500" />
+          <Property Name="CM_TIME" Type="datetime" />
+          <Property Name="CM_USERID" Type="varchar" MaxLength="50" />
+          <Property Name="CM_CONTENT" Type="nvarchar(max)" />
+          <Property Name="CM_ISPASS" Type="int" />
+          <Property Name="CM_ISSHOW" Type="int" />
+        </EntityType>
+        <EntityType Name="TB_ARTICLE">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CM_TITLE" Type="nvarchar" MaxLength="50" />
+          <Property Name="CM_AUTHOR" Type="nvarchar" MaxLength="50" />
+          <Property Name="CM_TIME" Type="datetime" />
+          <Property Name="CM_CONTENT" Type="nvarchar(max)" />
+          <Property Name="CM_ADVMTID" Type="nvarchar" MaxLength="50" />
+          <Property Name="CM_TYPE" Type="int" />
+          <Property Name="CM_USERID" Type="nvarchar" MaxLength="50" />
+          <Property Name="CM_ISPASS" Type="int" />
+          <Property Name="CM_ISSHOW" Type="int" />
+        </EntityType>
+        <EntityType Name="TB_CAROUSELFIGURE">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CM_PICPARH_ONE" Type="nvarchar" MaxLength="500" />
+          <Property Name="CM_PICPARH_TWO" Type="nvarchar" MaxLength="500" />
+          <Property Name="CM_PICPARH_THREE" Type="nvarchar" MaxLength="500" />
+          <Property Name="CM_URL_ONE" Type="nvarchar" MaxLength="500" />
+          <Property Name="CM_URL_TWO" Type="nvarchar" MaxLength="500" />
+          <Property Name="CM_URL_THREE" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="TB_FEEDBACK">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CM_USERID" Type="nvarchar" MaxLength="50" />
+          <Property Name="CM_PHONE" Type="nvarchar" MaxLength="50" />
+          <Property Name="CM_CONTENT" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TB_KEY">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CM_KEY" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TB_LSARTICLE">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CM_TITLE" Type="nvarchar" MaxLength="500" />
+          <Property Name="CM_AUTHOR" Type="nvarchar" MaxLength="50" />
+          <Property Name="CM_TIME" Type="datetime" />
+          <Property Name="CM_CONTENT" Type="nvarchar(max)" />
+          <Property Name="CM_USERID" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TB_PASSCODE">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CM_PHONE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CM_CODE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CM_SENTCOUNT" Type="int" Nullable="false" />
+          <Property Name="CM_SENTTIME" Type="datetime" Nullable="false" />
+          <Property Name="CM_TYPE" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TB_PAYINFO">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CM_USERID" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CM_MONTHS" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_SENSITIVECODE">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_CODE" Type="nvarchar(max)" />
+          <Property Name="CM_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_USER">
+          <Key>
+            <PropertyRef Name="CM_USERID" />
+          </Key>
+          <Property Name="CM_USERID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CM_OPENID" Type="varchar" MaxLength="50" />
+          <Property Name="CM_USERNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="CM_SEX" Type="varchar" MaxLength="50" />
+          <Property Name="CM_PHONE" Type="varchar" MaxLength="50" />
+          <Property Name="CM_PASSWORD" Type="varchar" MaxLength="50" />
+          <Property Name="CM_PICPATH" Type="varchar" MaxLength="500" />
+          <Property Name="CM_CREATETIME" Type="datetime" />
+          <Property Name="CM_ISVIP" Type="int" />
+          <Property Name="CM_EXPIRINGTIME" Type="date" />
+          <Property Name="CM_TRADE" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="TB_XXX">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CM_DDD" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityContainer Name="ADModelStoreContainer">
+          <EntitySet Name="TB_ADVERT" EntityType="Self.TB_ADVERT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_ARTICLE" EntityType="Self.TB_ARTICLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_CAROUSELFIGURE" EntityType="Self.TB_CAROUSELFIGURE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_FEEDBACK" EntityType="Self.TB_FEEDBACK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_KEY" EntityType="Self.TB_KEY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_LSARTICLE" EntityType="Self.TB_LSARTICLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_PASSCODE" EntityType="Self.TB_PASSCODE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_PAYINFO" EntityType="Self.TB_PAYINFO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_SENSITIVECODE" EntityType="Self.TB_SENSITIVECODE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_USER" EntityType="Self.TB_USER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_XXX" EntityType="Self.TB_XXX" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ADModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TB_ADVERT">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CM_TITLE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CM_PICPATH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CM_URL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CM_TIME" Type="DateTime" Precision="3" />
+          <Property Name="CM_USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CM_CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CM_ISPASS" Type="Int32" />
+          <Property Name="CM_ISSHOW" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TB_ARTICLE">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CM_TITLE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CM_AUTHOR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CM_TIME" Type="DateTime" Precision="3" />
+          <Property Name="CM_CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CM_ADVMTID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CM_TYPE" Type="Int32" />
+          <Property Name="CM_USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CM_ISPASS" Type="Int32" />
+          <Property Name="CM_ISSHOW" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TB_CAROUSELFIGURE">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CM_PICPARH_ONE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CM_PICPARH_TWO" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CM_PICPARH_THREE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CM_URL_ONE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CM_URL_TWO" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CM_URL_THREE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TB_FEEDBACK">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CM_USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CM_PHONE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CM_CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TB_KEY">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CM_KEY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TB_LSARTICLE">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CM_TITLE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CM_AUTHOR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CM_TIME" Type="DateTime" Precision="3" />
+          <Property Name="CM_CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CM_USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TB_PASSCODE">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CM_PHONE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CM_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CM_SENTCOUNT" Type="Int32" Nullable="false" />
+          <Property Name="CM_SENTTIME" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CM_TYPE" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TB_PAYINFO">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CM_USERID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CM_MONTHS" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_SENSITIVECODE">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_CODE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CM_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_USER">
+          <Key>
+            <PropertyRef Name="CM_USERID" />
+          </Key>
+          <Property Name="CM_USERID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CM_OPENID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CM_USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CM_SEX" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CM_PHONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CM_PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CM_PICPATH" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CM_CREATETIME" Type="DateTime" Precision="3" />
+          <Property Name="CM_ISVIP" Type="Int32" />
+          <Property Name="CM_EXPIRINGTIME" Type="DateTime" Precision="0" />
+          <Property Name="CM_TRADE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TB_XXX">
+          <Key>
+            <PropertyRef Name="CM_ID" />
+          </Key>
+          <Property Name="CM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CM_DDD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="XMWBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TB_ADVERT" EntityType="Self.TB_ADVERT" />
+          <EntitySet Name="TB_ARTICLE" EntityType="Self.TB_ARTICLE" />
+          <EntitySet Name="TB_CAROUSELFIGURE" EntityType="Self.TB_CAROUSELFIGURE" />
+          <EntitySet Name="TB_FEEDBACK" EntityType="Self.TB_FEEDBACK" />
+          <EntitySet Name="TB_KEY" EntityType="Self.TB_KEY" />
+          <EntitySet Name="TB_LSARTICLE" EntityType="Self.TB_LSARTICLE" />
+          <EntitySet Name="TB_PASSCODE" EntityType="Self.TB_PASSCODE" />
+          <EntitySet Name="TB_PAYINFO" EntityType="Self.TB_PAYINFO" />
+          <EntitySet Name="TB_SENSITIVECODE" EntityType="Self.TB_SENSITIVECODE" />
+          <EntitySet Name="TB_USER" EntityType="Self.TB_USER" />
+          <EntitySet Name="TB_XXX" EntityType="Self.TB_XXX" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ADModelStoreContainer" CdmEntityContainer="XMWBEntities">
+          <EntitySetMapping Name="TB_ADVERT">
+            <EntityTypeMapping TypeName="ADModel.TB_ADVERT">
+              <MappingFragment StoreEntitySet="TB_ADVERT">
+                <ScalarProperty Name="CM_ID" ColumnName="CM_ID" />
+                <ScalarProperty Name="CM_TITLE" ColumnName="CM_TITLE" />
+                <ScalarProperty Name="CM_PICPATH" ColumnName="CM_PICPATH" />
+                <ScalarProperty Name="CM_URL" ColumnName="CM_URL" />
+                <ScalarProperty Name="CM_TIME" ColumnName="CM_TIME" />
+                <ScalarProperty Name="CM_USERID" ColumnName="CM_USERID" />
+                <ScalarProperty Name="CM_CONTENT" ColumnName="CM_CONTENT" />
+                <ScalarProperty Name="CM_ISPASS" ColumnName="CM_ISPASS" />
+                <ScalarProperty Name="CM_ISSHOW" ColumnName="CM_ISSHOW" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ARTICLE">
+            <EntityTypeMapping TypeName="ADModel.TB_ARTICLE">
+              <MappingFragment StoreEntitySet="TB_ARTICLE">
+                <ScalarProperty Name="CM_ID" ColumnName="CM_ID" />
+                <ScalarProperty Name="CM_TITLE" ColumnName="CM_TITLE" />
+                <ScalarProperty Name="CM_AUTHOR" ColumnName="CM_AUTHOR" />
+                <ScalarProperty Name="CM_TIME" ColumnName="CM_TIME" />
+                <ScalarProperty Name="CM_CONTENT" ColumnName="CM_CONTENT" />
+                <ScalarProperty Name="CM_ADVMTID" ColumnName="CM_ADVMTID" />
+                <ScalarProperty Name="CM_TYPE" ColumnName="CM_TYPE" />
+                <ScalarProperty Name="CM_USERID" ColumnName="CM_USERID" />
+                <ScalarProperty Name="CM_ISPASS" ColumnName="CM_ISPASS" />
+                <ScalarProperty Name="CM_ISSHOW" ColumnName="CM_ISSHOW" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_CAROUSELFIGURE">
+            <EntityTypeMapping TypeName="ADModel.TB_CAROUSELFIGURE">
+              <MappingFragment StoreEntitySet="TB_CAROUSELFIGURE">
+                <ScalarProperty Name="CM_ID" ColumnName="CM_ID" />
+                <ScalarProperty Name="CM_PICPARH_ONE" ColumnName="CM_PICPARH_ONE" />
+                <ScalarProperty Name="CM_PICPARH_TWO" ColumnName="CM_PICPARH_TWO" />
+                <ScalarProperty Name="CM_PICPARH_THREE" ColumnName="CM_PICPARH_THREE" />
+                <ScalarProperty Name="CM_URL_ONE" ColumnName="CM_URL_ONE" />
+                <ScalarProperty Name="CM_URL_TWO" ColumnName="CM_URL_TWO" />
+                <ScalarProperty Name="CM_URL_THREE" ColumnName="CM_URL_THREE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_FEEDBACK">
+            <EntityTypeMapping TypeName="ADModel.TB_FEEDBACK">
+              <MappingFragment StoreEntitySet="TB_FEEDBACK">
+                <ScalarProperty Name="CM_ID" ColumnName="CM_ID" />
+                <ScalarProperty Name="CM_USERID" ColumnName="CM_USERID" />
+                <ScalarProperty Name="CM_PHONE" ColumnName="CM_PHONE" />
+                <ScalarProperty Name="CM_CONTENT" ColumnName="CM_CONTENT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_KEY">
+            <EntityTypeMapping TypeName="ADModel.TB_KEY">
+              <MappingFragment StoreEntitySet="TB_KEY">
+                <ScalarProperty Name="CM_ID" ColumnName="CM_ID" />
+                <ScalarProperty Name="CM_KEY" ColumnName="CM_KEY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_LSARTICLE">
+            <EntityTypeMapping TypeName="ADModel.TB_LSARTICLE">
+              <MappingFragment StoreEntitySet="TB_LSARTICLE">
+                <ScalarProperty Name="CM_ID" ColumnName="CM_ID" />
+                <ScalarProperty Name="CM_TITLE" ColumnName="CM_TITLE" />
+                <ScalarProperty Name="CM_AUTHOR" ColumnName="CM_AUTHOR" />
+                <ScalarProperty Name="CM_TIME" ColumnName="CM_TIME" />
+                <ScalarProperty Name="CM_CONTENT" ColumnName="CM_CONTENT" />
+                <ScalarProperty Name="CM_USERID" ColumnName="CM_USERID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_PASSCODE">
+            <EntityTypeMapping TypeName="ADModel.TB_PASSCODE">
+              <MappingFragment StoreEntitySet="TB_PASSCODE">
+                <ScalarProperty Name="CM_ID" ColumnName="CM_ID" />
+                <ScalarProperty Name="CM_PHONE" ColumnName="CM_PHONE" />
+                <ScalarProperty Name="CM_CODE" ColumnName="CM_CODE" />
+                <ScalarProperty Name="CM_SENTCOUNT" ColumnName="CM_SENTCOUNT" />
+                <ScalarProperty Name="CM_SENTTIME" ColumnName="CM_SENTTIME" />
+                <ScalarProperty Name="CM_TYPE" ColumnName="CM_TYPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_PAYINFO">
+            <EntityTypeMapping TypeName="ADModel.TB_PAYINFO">
+              <MappingFragment StoreEntitySet="TB_PAYINFO">
+                <ScalarProperty Name="CM_ID" ColumnName="CM_ID" />
+                <ScalarProperty Name="CM_USERID" ColumnName="CM_USERID" />
+                <ScalarProperty Name="CM_MONTHS" ColumnName="CM_MONTHS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_SENSITIVECODE">
+            <EntityTypeMapping TypeName="ADModel.TB_SENSITIVECODE">
+              <MappingFragment StoreEntitySet="TB_SENSITIVECODE">
+                <ScalarProperty Name="CM_CODE" ColumnName="CM_CODE" />
+                <ScalarProperty Name="CM_ID" ColumnName="CM_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_USER">
+            <EntityTypeMapping TypeName="ADModel.TB_USER">
+              <MappingFragment StoreEntitySet="TB_USER">
+                <ScalarProperty Name="CM_USERID" ColumnName="CM_USERID" />
+                <ScalarProperty Name="CM_OPENID" ColumnName="CM_OPENID" />
+                <ScalarProperty Name="CM_USERNAME" ColumnName="CM_USERNAME" />
+                <ScalarProperty Name="CM_SEX" ColumnName="CM_SEX" />
+                <ScalarProperty Name="CM_PHONE" ColumnName="CM_PHONE" />
+                <ScalarProperty Name="CM_PASSWORD" ColumnName="CM_PASSWORD" />
+                <ScalarProperty Name="CM_PICPATH" ColumnName="CM_PICPATH" />
+                <ScalarProperty Name="CM_CREATETIME" ColumnName="CM_CREATETIME" />
+                <ScalarProperty Name="CM_ISVIP" ColumnName="CM_ISVIP" />
+                <ScalarProperty Name="CM_EXPIRINGTIME" ColumnName="CM_EXPIRINGTIME" />
+                <ScalarProperty Name="CM_TRADE" ColumnName="CM_TRADE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_XXX">
+            <EntityTypeMapping TypeName="ADModel.TB_XXX">
+              <MappingFragment StoreEntitySet="TB_XXX">
+                <ScalarProperty Name="CM_ID" ColumnName="CM_ID" />
+                <ScalarProperty Name="CM_DDD" ColumnName="CM_DDD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

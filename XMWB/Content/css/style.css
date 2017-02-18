@@ -1,0 +1,273 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	magrin:0px;
+	padding: 0px;
+	box-sizing: border-box;
+	margin: 0 auto;
+}
+a{
+	text-decoration:none;
+}
+body{
+	background-color: #ccc;
+}
+
+header {
+	max-width:1005px;
+	height: 400px;
+	background-color:#1386C5;
+	position: relative;
+}
+header .content{
+	width:90%;
+	height: 250px;
+	position: absolute;
+	top: 10%;
+	left: 5%;
+	font-size: 30px;
+	resize: none;
+}
+header .reset{
+	width:30%;
+	height:50px;
+	position: absolute;
+	top: 80%;
+	left: 5%;
+	font-size: 30px;
+	border-radius: 8px;
+	background-color:#0A74C0;
+	border:none;
+	color: #ffffff;
+}
+header .open{
+	width:30%;
+	height:50px;
+	position: absolute;
+	top: 80%;
+	right: 5%;
+	font-size: 30px;
+	border-radius: 8px;
+	background-color:#0A74C0;
+	border:none;
+	color: #ffffff;
+}
+.library{
+    max-width:1005px;
+}
+.left{
+	width:50%;
+	height: 80px;
+	border-bottom: 3px solid #ccc;
+	border-right: 3px solid  #ccc;
+	text-align: center;
+	line-height: 80px;
+	color:#1386C5;
+	font-size: 30px;
+	float: left;
+	background-color: white;
+}
+.right{
+	width:50%;
+	height: 80px;
+	border-bottom: 3px solid #ccc;
+	text-align: center;
+	line-height: 80px;
+	color:#1386C5;
+	font-size: 30px;
+	float: left;
+	background-color: white;
+}
+.vip{
+	width:100%;
+	height: 80px;
+	border-bottom: 3px solid #ccc;
+    text-align: center;
+	line-height: 80px;
+	color:#1386C5;
+	font-size: 30px;
+	float: left;
+	background-color: white;
+}
+main{
+     max-width:1005px;
+}
+main .text{
+	height: 200px;
+	background-color: white;
+	clear: both;
+	margin-top: 5px;
+}
+main .text h3{
+	font-size:30px;
+	margin: 10px;
+	float:left;
+}
+main .text h4{
+	float:right;
+	margin: 10px;
+	font-size:25px;
+}
+main .text p{
+	font-size:25px;
+	clear:both;
+	margin: 20px;
+}
+main a{
+	display:inline-block;
+	width: 20%;
+	height: 50px;
+	background-color:#1386C5;
+	border-radius: 5px;
+	font-size: 20px;
+	color: white;
+	text-align: center;
+	line-height: 50px;
+	float:right;
+	margin-right: 5px;
+}
+.text-bottom p{
+	font-size: 20px;
+	color:#9B9B9B;
+	background-color: white;
+	line-height: 40px;
+    margin-top: 5px;
+	padding-left: 20px;
+}
+.tip{
+	height:80px;
+	background-color: white;
+	font-size: 20px;
+	line-height: 80px;
+	padding-left: 20px;
+	letter-spacing: 5px;
+	margin-top: 5px;
+}
+.tip .tip_title{
+	width: 180px;
+	height: 50px;
+	background-color:white;
+	color:red;
+	clear: both;
+	margin-top: -65px;
+}
+footer{
+    height: 70px;
+}
+/*媒体查询，参考部分 Bootstrap 框架*/
+/*在 992 和 1199 像素之间的屏幕里，中等屏幕，分辨率低的 pad pro*/
+@media (min-width: 992px) and (max-width: 1199px) {
+}
+/*在 768 和 991 像素之间的屏幕里，小屏幕，主要是 PAD*/
+@media (min-width: 768px) and (max-width: 991px) {
+	.left{
+	font-size: 25px;
+}
+.right{
+	font-size: 25px;
+}
+	.vip{
+    font-size: 25px;
+}
+}
+/*在 480 和 767 像素之间的屏幕里，超小屏幕，主要是手机*/
+@media (min-width: 480px) and (max-width: 767px) {
+	header {
+	height: 300px;
+}
+	header .content{
+	height: 150px;
+	font-size: 20px;
+}
+	header .reset{
+	top: 70%;
+	left: 5%;
+	font-size: 20px;
+}
+    header .open{
+	top: 70%;
+	right: 5%;
+	font-size: 20px;
+}
+	.left{
+	font-size: 20px;
+}
+    .right{
+	font-size: 20px;
+}
+	.vip{
+    font-size: 20px;
+}
+	main .text h3{
+	font-size:20px;
+}
+    main .text h4{
+	font-size:20px;
+}
+	main .text p{
+	font-size:17px;
+}
+	.text-bottom p{
+	font-size: 17px;
+}
+	.tip{
+	font-size: 17px;
+}
+    .tip .tip_title{
+	font-size: 17px;
+}
+	
+}
+/*在小于 480 像素的屏幕，微小屏幕，更低分辨率的手机*/
+@media (max-width: 479px) {
+	header {
+	height: 300px;
+}
+	header .content{
+	height: 150px;
+	font-size: 18px;
+}
+	header .reset{
+	top: 70%;
+	left: 5%;
+	font-size: 18px;
+}
+    header .open{
+	top: 70%;
+	right: 5%;
+	font-size: 18px;
+}
+	.left{
+	font-size: 18px;
+}
+    .right{
+	font-size: 18px;
+}
+	.vip{
+    font-size: 18px;
+}
+	main .text h3{
+	font-size:18px;
+}
+    main .text h4{
+	font-size:18px;
+}
+	main .text p{
+	font-size:17px;
+}
+	.text-bottom p{
+	font-size: 17px;
+}
+	.hidden{
+	display: none;
+	}
+	.tip{
+	font-size: 17px;
+}
+    .tip .tip_title{
+	font-size: 17px;
+    margin-top: 15px;
+	float: left;
+	margin-left: 26%;
+}
+}

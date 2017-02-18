@@ -1,0 +1,14 @@
+.Profile__photo {
+  text-align: center;
+  background-color: #CCE1C9;
+  padding: 20px; }
+  .Profile__photo img {
+    width: 100px;
+    height: 100px; }
+  .Profile__photo span {
+    display: block;
+    font-size: 18px; }
+.Profile__main {
+  margin-top: 10px; }
+
+/*# sourceMappingURL=Profile.css.map */

@@ -1,0 +1,124 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>广告微编 - 登陆</title>
+
+    <link rel="stylesheet" href="/Content/css/weui.min.css" />
+    <link rel="stylesheet" href="/Content/css/XM.css" />
+    
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/md5.js"></script>
+    <script src="~/Scripts/jquery.cookie.js"></script>
+    
+    <script type="text/javascript">
+        //function TextPrompt(str) {
+        //    $tt = "<div id='textprompt'>" + str + "</div>";
+        //    $("body").append($tt);
+
+        //    var text = $("#textprompt").css('display', 'none');
+        //    var w = $(window).height();
+        //    var h = $(window).width();
+
+        //}
+
+        function Submit() {
+            var phone = $("#phone").val();
+            var password = $("#pwd").val();
+
+            if (phone == null || phone == "" || phone == "undefined") {
+                //$("#ttl").html("请输入手机号");
+                alert("请输入手机号");
+                return;
+            }
+
+            if (password == null || password == "" || password == "undefined") {
+                //$("#ttl").html("请输入密码");
+                alert("请输入密码");
+                return;
+            }
+
+            var url = '/Login/LoginByPhone?t=' + new Date;
+            var data = { phone: phone, password: password };
+
+            $.ajax({
+                type: 'get',
+                url: url,
+                data: data,
+                async: false,
+                success: function (data) {
+                    if (data == "1") {
+                        //$("#ttl").html("请完善信息后再提交");
+                        alert("请完善信息后再提交");
+                    } else if (data == "2") {
+                        //$("#ttl").html("账号或密码错误");
+                        alert("账号或密码错误");
+                    } else {
+                        $.cookie('des', data, { path: '/', expires: 365 });
+                        window.location.href = "/Home";
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+
+
+    <div class="header">
+        <h1 class="header__title">登录账号</h1>
+    </div>
+
+    <div class="form">
+        <div class="input input--icon">
+            <svg>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                     xlink:href="/dist/icons/sprites.svg#icon--username">
+                </use>
+            </svg>
+            <input id="phone" type="tel" placeholder="请输入手机号" />
+        </div>
+
+
+        <div class="input input--icon">
+            <svg>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                     xlink:href="/dist/icons/sprites.svg#icon--password">
+                </use>
+            </svg>
+            <input id="pwd" type="password" placeholder="请输入密码" />
+        </div>
+
+
+        <div class="help-block">
+            <!--<span id="ttl"><i class="weui_icon_cancel"></i>密码输入不符合要求</span>-->
+        </div>
+
+        <div class="weui_cells_tips">
+
+            <div class="left">
+                <!--<a href="Signup.html" class="form__link">注册账号</a>-->
+            </div>
+            <div class="right">
+                <a href="PasswordForget.html" class="form__link">找回密码</a>
+            </div>
+
+            <div class="clearfix"></div>
+
+        </div>
+
+
+        <div class="weui_btn_area">
+            <a onclick="Submit()" class="weui_btn weui_btn_primary">登录</a>
+        </div>
+    </div>
+</body>
+</html>
+

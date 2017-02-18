@@ -1,0 +1,19 @@
+.Ad__item {
+  height: 100px; }
+.Ad__upload {
+  background-color: #333;
+  color: #fff;
+  margin-top: 10px !important;
+  margin-right: 2px !important;
+  z-index: 1; }
+.Ad__background__input {
+  min-height: 100px !important; }
+
+ .Ad__status {
+    color: red;
+    line-height: 50px;
+    padding: 0 10px; }
+    .Ad__status--success {
+      color: green; }
+
+/*# sourceMappingURL=Ad.css.map */

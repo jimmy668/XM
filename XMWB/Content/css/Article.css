@@ -1,0 +1,32 @@
+.ArticleLinkCreate__submit {
+  background-color: #333;
+  color: #fff;
+  margin-top: 10px !important;
+  margin-right: 2px !important;
+  z-index: 1; }
+
+.Article {
+  background-color: #fff;
+  max-width:640px;
+  margin: 0 auto;
+  padding-bottom: 110px; }
+  .Article__status {
+    color: red;
+    line-height: 50px;
+    padding: 0 10px; }
+    .Article__status--success {
+      color: green; }
+  .Article__title {
+    font-size: 26px !important; }
+  .Article__meta__date {
+    color: #8c8c8c;
+    margin-right: 10px; }
+  .Article__meta__author {
+    color: #758FB2; }
+  .Article__content {
+    color: #8c8c8c; }
+  .Article__content img {
+      max-width: 100%;
+  }
+
+/*# sourceMappingURL=Article.css.map */

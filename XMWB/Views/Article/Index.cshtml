@@ -1,0 +1,424 @@
+﻿
+@{
+    ViewBag.Title = "EditArticle";
+}
+
+<a href="javascript:;" id="btn-create-link-article" class="weui_btn weui_btn_primary button_small right">提交</a>
+
+<div id="article-preview"></div>
+
+<input type="hidden" id="ipt-link" value="@ViewBag.Url" />
+<input type="hidden" id="ipt-ad" />
+
+<div class="popover" id="popover-editor-six" style="display: none">
+    <div class="popover__content">
+        <div class="popover__content__inner">
+            <button class="popover__btn btn-delete">删除</button>
+            <button class="popover__btn btn-insert">插入文本</button>
+            <form id="form-article" action="/UploadArPic" name="form-ad" method="post" enctype="multipart/form-data" style="display:inline-block">
+                <input type="hidden" id="cookie" name="cookie" />
+                <input type="hidden" id="article-id" name="adid" />
+                <button class="popover__btn btn-image">
+                    插入图片
+                    <input type="file" name="files">
+                </button>
+            </form>
+            <button class="popover__btn btn-link">外链</button>
+            <button class="popover__btn btn-ad_to">插入广告</button>
+            <button class="popover__btn btn-video">插入视频</button>
+        </div>
+
+        <div class="popover__content__inner editor" id="editor-link" style="display: none">
+            <div class="editor__fields">
+                <label for="ipt-link">链接地址:</label>
+                <input id="Text1" placeholder="链接地址,如:www.baidu.com" />
+            </div>
+            <div class="editor__fields editor__fields--buttons">
+                <a href="javascript:;" class="popover__btn--link btn-cancel">取消</a>
+                <a href="javascript:;" class="popover__btn--link btn-save">保存</a>
+            </div>
+        </div>
+
+        <div class="popover__content__inner editor" id="editor-video" style="display: none">
+            <div class="editor__fields">
+                <label for="ipt-video">视频地址:</label>
+                <input id="ipt-video" />
+            </div>
+            <div class="editor__fields editor__fields--buttons">
+                <a href="javascript:;" class="popover__btn--link btn-cancel">取消</a>
+                <a href="javascript:;" class="popover__btn--link btn-save">保存</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="popover popover--simple" id="popover-editor-two" style="display: none">
+    <div class="popover__content">
+        <div class="popover__content__inner">
+            <button class="popover__btn btn-delete">删除</button>
+            <button class="popover__btn btn-insert">插入文本</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="loading" class="weui_loading_toast" style="display: none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+        <div class="weui_loading">
+            <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+        </div>
+        <p class="weui_toast_content">数据加载中</p>
+    </div>
+</div>
+
+<script type="text/html" id="template-article">
+    <article class="weui_article Article">
+        <h1 class="Article__title" id="title"><% this.CM_TITLE %></h1>
+        <section class="Article__meta">
+
+            <span class="Article__meta__date" id="date"><% this.CM_TIME %></span>
+            <span class="Article__meta__author" id="author"><% this.CM_AUTHOR %></span>
+
+        </section>
+        <section class="Article__content">
+            <% this.CM_CONTENT %>
+        </section>
+    </article>
+</script>
+
+<div id="ad-list__container">
+    <div class="weui_mask_transition" id="ad-list__mask"></div>
+    <div class="weui_actionsheet" id="ad-list__actionsheet">
+        <div class="weui_actionsheet_menu" id="ad-list__actionsheet__inner">
+
+        </div>
+        <div class="weui_actionsheet_action">
+            <div class="weui_actionsheet_cell" id="ad-list__actionsheet__cancel">取消</div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="template-ad-item">
+    <div class="weui_actionsheet_cell" data-id="<% this.CM_ID.trim() %>"><% this.CM_TITLE %></div>
+</script>
+
+
+<script>
+    var ArticleLinkCreate = function () {
+
+        this.ERRORS_LINK = [
+          {
+              CODE: 1,
+              MSG: 'URL 为空'
+          },
+
+          {
+              CODE: 2,
+              MSG: '解析失败'
+          },
+          {
+              CODE: 3,
+              MSG: 'cookie为空'
+          },
+          {
+              CODE: 4,
+              MSG: '只能采集微信文章'
+          },
+          {
+              CODE: 5,
+              MSG: '保存失败'
+          }
+        ];
+
+
+        this.ERRORS_CREATE = [
+          {
+              CODE: 1,
+              MSG: '文章ID为空'
+          },
+          {
+              CODE: 2,
+              MSG: '网络异常，请稍后再试'
+          },
+          {
+              CODE: 3,
+              MSG: '不存在此文章'
+          }
+        ];
+
+
+        this._TYPE = 2;
+        this.template = $('#template-article').html();
+
+        this.$btnParse = $('#btn-parse-link');
+        this.$btnCreate = $('#btn-create-link-article');
+
+        this.$iptLink = $('#ipt-link');
+        this.$iptId = $('#article-id');
+
+        this.$iptContent = $('#ipt-content');
+        this.$iptAD = $('#ipt-ad');
+
+        this.$articlePreview = $('#article-preview');
+
+        this.article = {};
+
+        this.loading();
+
+        this.__events();
+
+    };
+
+    ArticleLinkCreate.prototype.loading = function () {
+        ajax.get('/Article/Analysis', { url: this.$iptLink.val().replace('==', '____'), wh: $(document).width() }, function (data) {
+
+            //alert($(document).width());
+            this.article = data;
+            this.$iptContent.hide();
+
+            /*
+            var $articleContent = $(this.article.content).find('#js_content');
+            $articleContent.find('img').each(function (index, imgElement) {
+                //todo 需要图片
+                $(imgElement).attr('src', $(imgElement).data('src') + '&tp=webp&wxfrom=5&wx_lazy=1')
+            });
+            this.article.content = $articleContent.html();*/
+
+            this.article.CM_TIME = GenerateDate(this.article.CM_TIME);
+
+
+            this.$articlePreview.html(TemplateEngine(this.template, this.article));
+
+            this.$iptId.val(this.article.CM_ID);
+            //
+            //var imgs = document.getElementsByTagName('img');
+            //WechatImageFix(imgs, 'image');
+
+        }.bind(this), this.ERRORS_LINK);
+    };
+
+    ArticleLinkCreate.prototype.__events = function () {
+        //this.$btnParse.click(function () {
+        //    ajax.get('/Home/EditArticle', { url: this.$iptLink.val().replace('==', '____'), wh: $(document).width() }, function (data) {
+
+        //        //alert($(document).width());
+        //        this.article = data;
+        //        this.$iptContent.hide();
+
+        //        /*
+        //        var $articleContent = $(this.article.content).find('#js_content');
+        //        $articleContent.find('img').each(function (index, imgElement) {
+        //            //todo 需要图片
+        //            $(imgElement).attr('src', $(imgElement).data('src') + '&tp=webp&wxfrom=5&wx_lazy=1')
+        //        });
+        //        this.article.content = $articleContent.html();*/
+
+        //        this.article.CM_TIME = GenerateDate(this.article.CM_TIME);
+
+
+        //        this.$articlePreview.html(TemplateEngine(this.template, this.article));
+
+        //        this.$iptId.val(this.article.CM_ID);
+        //        //
+        //        //var imgs = document.getElementsByTagName('img');
+        //        //WechatImageFix(imgs, 'image');
+
+        //    }.bind(this), this.ERRORS_LINK);
+        //}.bind(this));
+
+
+        this.$btnCreate.click(function () {
+            //此处为编辑后的文章上传成功后跳转到预览页面
+
+
+
+            //var url = '/api/ReviseEditArt/?t=' + new Date;
+            var data = { artid: this.article.CM_ID, content: encodeURI($(".Article__content").html()), advid: this.$iptAD.val(), title: $("#title").text(), date: $("#date").text(), author: $("#author").text() };
+
+            ajax.post('/Article/Save', data, function (data) {
+                //alert(data);
+                window.location.href = '/Article/Preview?id=' + this.article.CM_ID + '&avid=' + this.$iptAD.val();
+            }.bind(this), this.ERRORS_CREATE)
+
+            //$.ajax({
+            //    type: 'post',
+            //    url: url,
+            //    data: data,
+            //    success: function (data) {
+            //        if(data == "0"){
+            //            window.location.href = '/View/ArticlePreview.aspx?id=' + this.article.CM_ID + '&avid=' + this.$iptAD.val();
+            //        } else if (data == "1") {
+            //            alert("文章ID为空");
+            //        } else if (data == "2") {
+            //            alert("网络异常，请稍后再试");
+            //        } else if (data == "3") {
+            //            alert("不存在此文章");
+            //        }
+            //    },
+            //    error: function () {
+            //        alert("网络异常，请稍后再试");
+            //    }
+            //});
+        }.bind(this));
+    };
+
+
+    new ArticleLinkCreate;
+
+
+    var AdListSheet = function () {
+
+        this.ERORRS = [
+          {
+              CODE: 1,
+              MSG: 'cookie为空或错误'
+          },
+          {
+              CODE: 2,
+              MSG: '查询失败'
+          }
+        ];
+
+
+        this.$btnInsertAD = $('.btn-ad');
+
+        //补丁
+        this.$btnInsertADtoAd = $('.btn-ad_to');
+        this.$AdLists = "";
+
+
+        this.$iptAD = $('#ipt-ad');
+
+        this.$mask = $('#ad-list__mask');
+        this.$list = $('#ad-list__actionsheet');
+        this.$inner = $('#ad-list__actionsheet__inner');
+        this.$cancel = $('#ad-list__actionsheet__cancel');
+        this.template = $('#template-ad-item').html();
+
+
+
+        this.__events();
+    }
+
+    AdListSheet.prototype.show = function () {
+        this.$list.addClass('weui_actionsheet_toggle');
+        this.$mask.show().addClass('weui_fade_toggle').click(function () {
+            this.hide();
+        }.bind(this));
+
+        this.$cancel.click(function () {
+            this.hide();
+        }.bind(this));
+
+        this.$inner.children().click(function (e) {
+            var adlist = this.$AdLists;//补丁
+            if (adlist == "") {
+                this.$iptAD.val($(e.target).attr('data-id'));
+                this.hide();
+            } else {
+                var count = adlist.length;
+                var id = $(e.target).attr('data-id');
+                for (var i = 0; i < count; i++) {
+                    if (adlist[i].CM_ID == id) {
+                        //ObjAdCon = "<div style='position: relative;'><div style='position: absolute;z-index: 2;'><p>" + adlist[i].CM_CONTENT + "</p></div><div><img src='/api/dds/?path=" + adlist[i].CM_PICPATH + "'></div></div>";
+                        //ObjAdCon = "<div style='position: relative;'><div style='position: absolute;z-index: 2;'><p>" + adlist[i].CM_CONTENT + "</p></div><div><img src='../Images/avatar.png'></div></div>";
+                        ObjAdCon = "<div style='position: relative; width:100%;'><div style='position: absolute;z-index: 2;width:100%; height: 44px; padding-left: 10px; padding-right: 10px; box-sizing:border-box;'><p style='color: #fff;'>" + adlist[i].CM_CONTENT + "</p></div><div><div style='width: 100%; height: 85px; background:url(/api/dds/?path=" + adlist[i].CM_PICPATH + ") no-repeat center -250px; background-size: 100% auto;'></div></div></div>";
+                    }
+                }
+                FloatContent();
+                this.hide();
+            }
+        }.bind(this));
+        appendTime = 0;
+        this.$list.unbind('transitionend').unbind('webkitTransitionEnd');
+    }
+
+    AdListSheet.prototype.hide = function () {
+        this.$list.removeClass('weui_actionsheet_toggle');
+        this.$mask.removeClass('weui_fade_toggle');
+        this.$list.on('transitionend', function () {
+            this.$mask.hide();
+        }.bind(this)).on('webkitTransitionEnd', function () {
+            this.$mask.hide();
+        }.bind(this));
+    }
+
+    AdListSheet.prototype.__events = function () {
+
+        this.$btnInsertAD.click(function () {
+            this.$inner.empty();
+
+            this.$AdLists = "";
+            ajax.get('QueryAllAdvertById', function (data) {
+
+                if (data == null || data == "null" || data.length === 0) {
+                    alert('您还未创建广告');
+                    return;
+                } else if (data == "yes") {
+                    alert('您的广告还在审核中');
+                    return;
+                } else if (data == "no") {
+                    alert('您还未创建广告');
+                    return;
+                }
+
+                for (var i = 0; i < data.length; i++) {
+                    this.$inner.append(TemplateEngine(this.template, data[i]));
+
+                    this.show();
+                }
+            }.bind(this), this.ERORRS);
+
+        }.bind(this));
+
+        this.$btnInsertADtoAd.click(function () {
+            this.$inner.empty();
+            ajax.get('QueryAllAdvertById', function (data) {
+
+                if (data == null || data == "null" || data.length === 0) {
+                    alert('您还未创建广告');
+                    return;
+                } else if (data == "yes") {
+                    alert('您的广告还在审核中');
+                    return;
+                } else if (data == "no") {
+                    alert('您还未创建广告');
+                    return;
+                }
+
+                this.$AdLists = data;
+                //alert(this.$AdLists);
+                for (var i = 0; i < data.length; i++) {
+                    this.$inner.append(TemplateEngine(this.template, data[i]));
+
+                    this.show();
+                }
+            }.bind(this), this.ERORRS);
+        }.bind(this));
+    };
+
+    new AdListSheet;
+
+    function FloatContent() {
+        if (appendTime > 0) {
+            return;
+        }
+
+        $(ObjAdCon).appendTo($(BeAppendObj));
+        appendTime = appendTime + 1;
+    }
+</script>
